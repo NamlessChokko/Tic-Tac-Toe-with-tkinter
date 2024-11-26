@@ -56,12 +56,15 @@ def button_click(button, row: int = format, col: int = format) -> None:
 
     winner = check_winner()
     
-    if check_draw():  # Check for a draw
+    if check_draw():  
+        # Check for a draw
+        disable_buttons()  
         show_exit_dialog("It's a draw!")
         return
 
     if winner:  
         # Show dialog with winner message
+        disable_buttons()  
         show_exit_dialog(f"The winner is {winner}!")
         return
 
@@ -75,6 +78,22 @@ def turn_grid(button, row: int = format, col: int = format) -> None:
         button["fg"] = "red" if last_turn else "blue"  # Change button color based on the current turn
         print(f"Button pressed: Row {row}, Column {col}, Turn: {'X' if last_turn else 'O'}")
         last_turn = not last_turn  # Toggle turn
+
+
+# Function to disable all buttons.
+def disable_buttons() -> None:
+    """Disable all buttons."""
+    for row in button_matrix:
+        for button in row:
+            button["state"] = tk.DISABLED
+
+
+# Function to enable all buttons.
+def enable_buttons() -> None:
+    """Enable all buttons."""
+    for row in button_matrix:
+        for button in row:
+            button["state"] = tk.NORMAL
 
 
 #Function that checks for a winner in rows, columns, or diagonals.
@@ -131,7 +150,6 @@ def show_exit_dialog(message: str):
     def restart_game():
         dialog.destroy()  # Close the dialog
         reset_game()  # Reset the game board
-
     tk.Button(dialog, text="Restart", font=("Helvetica", 12), command=restart_game).pack(pady=5)
 
     # Exit button
