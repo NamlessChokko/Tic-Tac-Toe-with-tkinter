@@ -16,7 +16,7 @@ Requirements:
 - A computer with the capacity of turn on.
 - 128kb RAM.
 - Screen resolution of 174 x 168 or higher.
-- 7 kB of free disk space.
+- 8 kB of free disk space.
 
 Instructions:
 - Adjust the format variable to adjust the grid size.
@@ -86,14 +86,6 @@ def disable_buttons() -> None:
     for row in button_matrix:
         for button in row:
             button["state"] = tk.DISABLED
-
-
-# Function to enable all buttons.
-def enable_buttons() -> None:
-    """Enable all buttons."""
-    for row in button_matrix:
-        for button in row:
-            button["state"] = tk.NORMAL
 
 
 #Function that checks for a winner in rows, columns, or diagonals.
